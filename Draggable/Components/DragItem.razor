@@ -1,0 +1,25 @@
+﻿<div id="@Id" style="position:absolute; top:@(StartTop+"px"); cursor:move;" @onpointerdown="OnPointerDown">
+    @ChildContent
+</div>
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public int StartTop { get; set; }
+
+    public string Id { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        Id = Guid.NewGuid().ToString();
+    }
+
+    public void OnPointerDown(PointerEventArgs e)
+    {
+        DragService.Drag(Id);
+    }
+}
